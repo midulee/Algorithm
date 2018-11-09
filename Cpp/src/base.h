@@ -8,6 +8,6 @@
 #ifndef SRC_BASE_H_
 #define SRC_BASE_H_
 std::string bool_to_string(const bool &in);
-
+void print_array(int arr[]);
 
 #endif /* SRC_BASE_H_ */
