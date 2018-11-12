@@ -10,6 +10,6 @@
 bool check_anagrams_iter(const std::string &s1, const std::string &s2);
 bool check_anagrams_stack(const std::string &s1, const std::string &s2);
 
-
+bool checkBalancedParenthese(std::string &s1);
 
 #endif /* SRC_QUIZ_QUIZ_GENERAL_H_ */

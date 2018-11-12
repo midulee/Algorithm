@@ -3,6 +3,7 @@
 #include "quiz_general.h"
 using namespace std;
 
+// CHECK ANAGRAMS
 bool check_anagrams_iter(const string &s1, const string &s2){
 	if(s1.length() != s2.length())
 		return false;
@@ -50,4 +51,21 @@ bool check_anagrams_stack(const string &s1, const string &s2){
 			return false;
 	}
 	return true;
+}
+
+// CHECK BALANCED PARENTHESE
+#include <stack>
+bool checkBalancedParenthese(string &input){
+	stack<int> parStack;
+	for(int i = 0, len = input.length(); i<len; ++i){
+		if (input[i] == '(')
+			parStack.push(1);
+		else if (input[i] == ')'){
+			if (parStack.empty())
+				return false;
+			else
+				parStack.pop();
+		}
+	}
+	return parStack.empty();
 }

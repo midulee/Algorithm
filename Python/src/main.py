@@ -1,6 +1,11 @@
 from src.data_structure import Stack
 from src.sort import Sort
+import src.dp as dp
 import random
+import time
+
+
+
 
 if __name__ == '__main__':
     ran_list = [random.randint(0, 100) for _ in range(10)]
@@ -15,3 +20,11 @@ if __name__ == '__main__':
     stack.print()
     stack.pop()
     stack.print()
+
+    s1 = "ABCBDABA"
+    s2 = "BDCABA"
+    mmap = {}
+    print(dp.find_LCS_length_topdown(s1, s2, mmap))
+    print(dp.find_LCS_length_bottomup(s1, s2))
+
+    dp.find_ugly_number(15)
