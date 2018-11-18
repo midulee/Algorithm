@@ -1,8 +1,8 @@
-from src.data_structure import Stack
+from src.data_structure import Stack, LinkedList
 from src.sort import Sort
 import src.dp as dp
 import random
-import time
+import src.misc as misc
 
 
 
@@ -28,3 +28,19 @@ if __name__ == '__main__':
     print(dp.find_LCS_length_bottomup(s1, s2))
 
     dp.find_ugly_number(15)
+    print("Longest increasing sequence")
+    dp.longest_increase_sequence([10,22,9,33,21,50,41,60])
+    print("Longest palindromic sequence")
+    seq = "ABBDACAB"
+    mmap = {}
+    print(dp.longest_palindromic_sequence_topdown(seq, mmap))
+    misc.test_misc()
+
+    ll = LinkedList()
+    for i in range(10):
+        ll.add(i)
+    ll.print_list()
+    ll.remove(3)
+    ll.remove(9)
+    ll.remove(0)
+    ll.print_list()

@@ -69,3 +69,13 @@ bool checkBalancedParenthese(string &input){
 	}
 	return parStack.empty();
 }
+
+string reverse_string_recursive(string s){
+	if (s.length() > 1){
+		string sub = s.substr(1,s.length());
+		s = reverse_string(sub) + s[0];
+	}
+	return s;
+}
+
+

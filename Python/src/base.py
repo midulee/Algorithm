@@ -8,3 +8,10 @@ def bench_mark(func):
         print("Function {} took {} seconds to complete".format(func.__name__, execution_time))
         return res
     return bm
+
+def assertEqual(i1, i2):
+    if i1 == i2:
+        print("PASSED")
+    else:
+        print("FAILED")
+

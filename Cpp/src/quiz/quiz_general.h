@@ -12,4 +12,5 @@ bool check_anagrams_stack(const std::string &s1, const std::string &s2);
 
 bool checkBalancedParenthese(std::string &s1);
 
+std::string reverse_string(std::string s);
 #endif /* SRC_QUIZ_QUIZ_GENERAL_H_ */

@@ -1,3 +1,5 @@
+from mmap import mmap
+
 from src.base import bench_mark
 
 @bench_mark
@@ -54,3 +56,26 @@ def find_ugly_number(nth):
         i += 1
     print(ugly)
     print(ugly[-1])
+
+def longest_increase_sequence(arr):
+    table = [1] * len(arr)
+    for i in range(1, len(arr), 1):
+        for j in range(i):
+            if arr[j] < arr[i]:
+                table[i] = max(table[i], table[j] + 1)
+    print(max(table))
+
+
+def longest_palindromic_sequence_topdown(seq, mmap):
+    if len(seq) <= 1:
+        return len(seq)
+    if seq not in mmap:
+        if seq[0] == seq[-1]:
+            new_seq = seq[1:-1]
+            mmap[seq] = longest_palindromic_sequence_topdown(new_seq, mmap) + 2
+        else:
+            left = longest_palindromic_sequence_topdown(seq[1:], mmap)
+            right = longest_palindromic_sequence_topdown(seq[:-1], mmap)
+            mmap[seq] = max(left, right)
+    return mmap[seq]
+

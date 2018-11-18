@@ -9,6 +9,15 @@
 #include "quiz/sorting.h"
 #include "quiz/dp.h"
 
+template <typename T>
+void assertEqual(T a, T b){
+	if ( a == b) {
+		cout << "TRUE" << endl;
+	} else {
+		cout << "FALSE" << endl;
+	}
+}
+
 int main(){
 	bench_mark(10000, loop_math);
 	bench_mark(10000, loop);
@@ -30,5 +39,7 @@ int main(){
 	s1 = "ABCBEDAB";
 	s2 = "BEDCABA";
 	cout << find_LCS_length(s1, s2) << endl;
+
+	assertEqual(reverse_string("ABC"), string("CDA"));
 	return 0;
 }
