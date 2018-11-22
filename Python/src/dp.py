@@ -78,4 +78,3 @@ def longest_palindromic_sequence_topdown(seq, mmap):
             right = longest_palindromic_sequence_topdown(seq[:-1], mmap)
             mmap[seq] = max(left, right)
     return mmap[seq]
-

@@ -1,26 +1,18 @@
 from src.data_structure import Stack, LinkedList
 from src.sort import Sort
+from src.Drawable import Drawable
 import src.dp as dp
 import random
 import src.misc as misc
 
-
-
-
-if __name__ == '__main__':
+def sort_func():
     ran_list = [random.randint(0, 100) for _ in range(10)]
     print(ran_list)
     sort = Sort(ran_list)
     sort.merge_sort()
     sort.print_sorted_list()
 
-    stack = Stack([1,2,4])
-    stack.push(3)
-    stack.push(5)
-    stack.print()
-    stack.pop()
-    stack.print()
-
+def dynamic_programming_func():
     s1 = "ABCBDABA"
     s2 = "BDCABA"
     mmap = {}
@@ -34,13 +26,45 @@ if __name__ == '__main__':
     seq = "ABBDACAB"
     mmap = {}
     print(dp.longest_palindromic_sequence_topdown(seq, mmap))
+
+
+def data_structure_func():
+    # Data structure
+    def stack():
+        stack = Stack([1,2,4])
+        stack.push(3)
+        stack.push(5)
+        stack.print()
+        stack.pop()
+        stack.print()
+    stack()
+
+    def linked_list():
+        ll = LinkedList()
+        for i in range(10):
+            ll.add(i)
+        ll.print_list()
+        ll.remove(3)
+        ll.remove(9)
+        ll.remove(0)
+        ll.print_list()
+    linked_list()
+
+def misc_func():
     misc.test_misc()
 
-    ll = LinkedList()
-    for i in range(10):
-        ll.add(i)
-    ll.print_list()
-    ll.remove(3)
-    ll.remove(9)
-    ll.remove(0)
-    ll.print_list()
+
+def draw_func():
+    # Draw part
+    paint = Drawable()
+    paint.main()
+
+if __name__ == '__main__':
+    '''
+    data_structure_func()
+    dynamic_programming_func()
+    sort_func()
+    misc_func()
+    '''
+    draw_func()
+

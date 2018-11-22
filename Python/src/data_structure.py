@@ -1,23 +1,20 @@
 class Stack:
-    def __init__(self, initial = None):
-        if initial:
-            self.members = initial
-        else:
-            self.members = []
+    def __init__(self, initial = []):
+        self.members = initial
 
     def push(self, new):
         self.members.append(new)
 
     def pop(self):
-        self.members.pop()
+        return self.members.pop()
 
     def top(self):
         print(self.members[-1])
 
     def empty(self):
         if self.members:
-            return True
-        return False
+            return False
+        return True
 
     def size(self):
         return len(self.members)
