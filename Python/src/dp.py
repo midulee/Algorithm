@@ -1,4 +1,5 @@
 from mmap import mmap
+import sys
 
 from src.base import bench_mark
 
@@ -78,3 +79,25 @@ def longest_palindromic_sequence_topdown(seq, mmap):
             right = longest_palindromic_sequence_topdown(seq[:-1], mmap)
             mmap[seq] = max(left, right)
     return mmap[seq]
+
+
+def get_minimum_coin_to_reach_target_topdown(target, mem):
+    if mem[target]:
+        return mem[target]
+
+    if target < 0:
+        return sys.maxsize
+    elif target > 0:
+        mem[target] = 1 + min(get_minimum_coin_to_reach_target_topdown(target - 1, mem),
+                              get_minimum_coin_to_reach_target_topdown(target - 2, mem),
+                              get_minimum_coin_to_reach_target_topdown(target - 5, mem))
+        return mem[target]
+    else:
+        return 0
+
+
+def get_minimum_coin_to_reach_target_bottomup(target, coins):
+    table = [0] * (target+1)
+    for i in range(1, target+1):
+        table[i] = min([table[i-c] + 1 for c in coins if i >= c])
+    return table[target]

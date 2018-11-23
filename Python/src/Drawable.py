@@ -48,10 +48,29 @@ class Drawable:
             self.sierpinski(z, self.get_mid_point(z, x), self.get_mid_point(y, z), level - 1, True)
             self.sierpinski(self.get_mid_point(x,y), self.get_mid_point(y,z), self.get_mid_point(x,z), level - 1, False)
 
+    def snowflake_full(self, level, edge):
+        for i in range(3):
+            self.snowflake_edge(level, edge)
+            self.pointer.right(120)
+
+    def snowflake_edge(self, level, edge):
+        if level > 0:
+            small_edge = edge // 3
+            self.snowflake_edge(level - 1, small_edge)
+            self.pointer.left(60)
+            self.snowflake_edge(level - 1, small_edge)
+            self.pointer.left(240)
+            self.snowflake_edge(level - 1, small_edge)
+            self.pointer.left(60)
+            self.snowflake_edge(level - 1, small_edge)
+        else:
+            self.pointer.forward(edge)
+
     def main(self):
         self.line_color(self.color[4])
         self.background_color(self.color[0])
         self.Spiral(100)
         self.Triangle(300)
         self.sierpinski([-200,-200],[0,200], [200,-200], 2, True)
+        self.snowflake_full(3, 270)
         self.screen.exitonclick()

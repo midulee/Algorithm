@@ -27,6 +27,12 @@ def dynamic_programming_func():
     mmap = {}
     print(dp.longest_palindromic_sequence_topdown(seq, mmap))
 
+    print("Coin change to reach target")
+    target = 19
+    mem = [0] * (target + 1)
+    print(dp.get_minimum_coin_to_reach_target_topdown(target, mem))
+    print(dp.get_minimum_coin_to_reach_target_bottomup(10, [1,2,5]))
+
 
 def data_structure_func():
     # Data structure
@@ -60,11 +66,9 @@ def draw_func():
     paint.main()
 
 if __name__ == '__main__':
-    '''
-    data_structure_func()
-    dynamic_programming_func()
-    sort_func()
-    misc_func()
-    '''
+    # data_structure_func()
+    # dynamic_programming_func()
+    # sort_func()
+    # misc_func()
     draw_func()
 
