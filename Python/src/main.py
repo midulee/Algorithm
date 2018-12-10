@@ -1,4 +1,4 @@
-from src.data_structure import Stack, LinkedList
+from src.data_structure import Stack, LinkedList, Heap
 from src.sort import Sort
 from src.Drawable import Drawable
 import src.dp as dp
@@ -9,15 +9,18 @@ def sort_func():
     ran_list = [random.randint(0, 100) for _ in range(10)]
     print(ran_list)
     sort = Sort(ran_list)
-    sort.merge_sort()
-    sort.print_sorted_list()
+    sort.selection_sort()
+    sort.restore()
+    sort.insertion_sort()
+    # sort.merge_sort()
+    # sort.print_sorted_list()
 
 def dynamic_programming_func():
     s1 = "ABCBDABA"
     s2 = "BDCABA"
     mmap = {}
-    print(dp.find_LCS_length_topdown(s1, s2, mmap))
-    print(dp.find_LCS_length_bottomup(s1, s2))
+    print(dp.find_LCS_length_td(s1, s2, mmap))
+    print(dp.find_LCS_length_bu(s1, s2))
 
     dp.find_ugly_number(15)
     print("Longest increasing sequence")
@@ -25,13 +28,13 @@ def dynamic_programming_func():
     print("Longest palindromic sequence")
     seq = "ABBDACAB"
     mmap = {}
-    print(dp.longest_palindromic_sequence_topdown(seq, mmap))
+    print(dp.longest_palindromic_sequence_td(seq, mmap))
 
     print("Coin change to reach target")
     target = 19
     mem = [0] * (target + 1)
-    print(dp.get_minimum_coin_to_reach_target_topdown(target, mem))
-    print(dp.get_minimum_coin_to_reach_target_bottomup(10, [1,2,5]))
+    print(dp.get_minimum_coin_to_reach_target_td(target, mem))
+    print(dp.get_minimum_coin_to_reach_target_bu(10, [1,2,5]))
 
 
 def data_structure_func():
@@ -56,6 +59,21 @@ def data_structure_func():
         ll.print_list()
     linked_list()
 
+    def heap():
+        heap = Heap([])
+        heap.add(1)
+        heap.add(5)
+        heap.add(3)
+        heap.add(9)
+        heap.add(7)
+        heap.add(6)
+        print(heap.pop())
+        print(heap.pop())
+        print(heap.pop())
+        heap.print()
+
+    heap()
+
 def misc_func():
     misc.test_misc()
 
@@ -68,7 +86,7 @@ def draw_func():
 if __name__ == '__main__':
     # data_structure_func()
     # dynamic_programming_func()
-    # sort_func()
+    sort_func()
     # misc_func()
-    draw_func()
+    # draw_func()
 

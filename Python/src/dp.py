@@ -4,7 +4,7 @@ import sys
 from src.base import bench_mark
 
 @bench_mark
-def find_LCS_length_topdown(s1, s2, mmap):
+def find_LCS_length_td(s1, s2, mmap):
     l1 = len(s1)
     l2 = len(s2)
     if l1 == 0 or l2 == 0:
@@ -15,14 +15,14 @@ def find_LCS_length_topdown(s1, s2, mmap):
         return mmap[key]
 
     if s1[l1-1] == s2[l2-1]:
-        mmap[key] = 1 + find_LCS_length_topdown(s1[:l1 - 1], s2[:l2 - 1], mmap)
+        mmap[key] = 1 + find_LCS_length_td(s1[:l1 - 1], s2[:l2 - 1], mmap)
     else:
-        mmap[key] = max(find_LCS_length_topdown(s1, s2[:l2 - 1], mmap), find_LCS_length_topdown(s1[:l1 - 1], s2, mmap))
+        mmap[key] = max(find_LCS_length_td(s1, s2[:l2 - 1], mmap), find_LCS_length_td(s1[:l1 - 1], s2, mmap))
 
     return mmap[key]
 
 @bench_mark
-def find_LCS_length_bottomup(s1, s2):
+def find_LCS_length_bu(s1, s2):
     #Intialize zeros table
     l1 = len(s1)+1
     l2 = len(s2)+1
@@ -67,37 +67,65 @@ def longest_increase_sequence(arr):
     print(max(table))
 
 
-def longest_palindromic_sequence_topdown(seq, mmap):
+def longest_palindromic_sequence_td(seq, mmap):
     if len(seq) <= 1:
         return len(seq)
     if seq not in mmap:
         if seq[0] == seq[-1]:
             new_seq = seq[1:-1]
-            mmap[seq] = longest_palindromic_sequence_topdown(new_seq, mmap) + 2
+            mmap[seq] = longest_palindromic_sequence_td(new_seq, mmap) + 2
         else:
-            left = longest_palindromic_sequence_topdown(seq[1:], mmap)
-            right = longest_palindromic_sequence_topdown(seq[:-1], mmap)
+            left = longest_palindromic_sequence_td(seq[1:], mmap)
+            right = longest_palindromic_sequence_td(seq[:-1], mmap)
             mmap[seq] = max(left, right)
     return mmap[seq]
 
 
-def get_minimum_coin_to_reach_target_topdown(target, mem):
+def get_minimum_coin_to_reach_target_td(target, mem):
     if mem[target]:
         return mem[target]
 
     if target < 0:
         return sys.maxsize
     elif target > 0:
-        mem[target] = 1 + min(get_minimum_coin_to_reach_target_topdown(target - 1, mem),
-                              get_minimum_coin_to_reach_target_topdown(target - 2, mem),
-                              get_minimum_coin_to_reach_target_topdown(target - 5, mem))
+        mem[target] = 1 + min(get_minimum_coin_to_reach_target_td(target - 1, mem),
+                              get_minimum_coin_to_reach_target_td(target - 2, mem),
+                              get_minimum_coin_to_reach_target_td(target - 5, mem))
         return mem[target]
     else:
         return 0
 
 
-def get_minimum_coin_to_reach_target_bottomup(target, coins):
+def get_minimum_coin_to_reach_target_bu(target, coins):
     table = [0] * (target+1)
     for i in range(1, target+1):
         table[i] = min([table[i-c] + 1 for c in coins if i >= c])
     return table[target]
+
+
+'''
+This problem is called the string edit distance problem, and is quite useful in many areas of research. 
+Suppose that you want to transform the word “algorithm” into the word “alligator.” 
+For each letter you can either copy the letter from one word to another at a cost of 5, 
+you can delete a letter at cost of 20, or insert a letter at a cost of 20. 
+The total cost to transform one word into another is used by spell check programs 
+to provide suggestions for words that are close to one another. 
+Use dynamic programming techniques to develop an algorithm that 
+gives you the smallest edit distance between any two words.
+
+
+  1        2           3
+  2        3           4
+  3        4           8
+  4        5           8
+  5        9          10
+
+'''
+
+def max_profit_in_limitation_bu(limit):
+    items = [{'weight': 2, 'value': 3},
+             {'weight': 3, 'value': 4},
+             {'weight': 4, 'value': 8},
+             {'weight': 5, 'value': 8},
+             {'weight': 9, 'value': 10}]
+    profit_table = [0] * limit

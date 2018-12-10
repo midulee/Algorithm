@@ -1,5 +1,5 @@
 class Stack:
-    def __init__(self, initial = []):
+    def __init__(self, initial=[]):
         self.members = initial
 
     def push(self, new):
@@ -59,6 +59,7 @@ class Node:
         self.data = value
         self.next = None
 
+
 class LinkedList:
     def __init__(self):
         self.head = None
@@ -98,3 +99,61 @@ class LinkedList:
 
     def get_size(self):
         return self.size
+
+
+class Heap:
+    '''
+    Max Heap data structure implementation using array
+    '''
+
+    def __init__(self, initial=[]):
+        self.members = initial
+
+    def add(self, value):
+        self.members.append(value)
+        self.alignUp()
+        self.print()
+
+    def getRoot(self):
+        return self.members[0]
+
+    def isEmpty(self):
+        if self.members:
+            return False
+        return True
+
+    def pop(self):
+        if self.isEmpty():
+            print("Heap is empty, no member left to pop")
+            return
+
+        root = self.members[0]
+        self.members[0] = self.members.pop()
+        self.alignDown()
+        return root
+
+    def print(self):
+        print(self.members)
+
+    def alignUp(self):
+        last = len(self.members) - 1
+        parent = (last - 1) // 2
+        while parent >= 0 and self.members[last] < self.members[parent]:
+            self.members[parent], self.members[last] = self.members[last], self.members[parent]
+            last = parent
+            parent = (last - 1) // 2
+
+
+    def alignDown(self):
+        index = 0
+        left = index * 2 + 1
+        right = index * 2 + 2
+        while (left and right) < len(self.members) and (self.members[index] > self.members[left] or self.members[index] > self.members[right]):
+            if self.members[left] < self.members[right]:
+                self.members[index], self.members[left] = self.members[left], self.members[index]
+                index = left
+            else:
+                self.members[index], self.members[right] = self.members[right], self.members[index]
+                index = right
+            left = index*2 + 1
+            right = index*2 + 2
