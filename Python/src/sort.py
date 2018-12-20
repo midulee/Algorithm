@@ -5,7 +5,7 @@ class Sort:
         self.given = list(input)
 
     def restore(self):
-        self.list = self.given
+        self.list = list(self.given)
 
     def print_sorted_list(self):
         print(self.list)
@@ -42,8 +42,10 @@ class Sort:
         return self.merge_left_and_right(left, right)
 
     def merge_sort(self):
+        print(inspect.stack()[0][3])
         out = self.merge_sort_recursive(self.list)
         self.list = out
+        self.print_sorted_list()
 
     def bubble_sort(self):
         top = len(self.list)
@@ -59,7 +61,7 @@ class Sort:
             top -= 1
 
     def selection_sort(self):
-        print("SELECTION SORT")
+        print(inspect.stack()[0][3])
         for index in range(len(self.list)):
             # Find smallest index in the list
             min = index
@@ -83,3 +85,40 @@ class Sort:
                     self.list[i+1] = temp
                     break
             self.print_sorted_list()
+
+    def quick_sort(self):
+        print(inspect.stack()[0][3])
+        self.quick_sort_sub(0, len(self.list) - 1)
+        self.print_sorted_list()
+
+    def quick_sort_medium_pivot(self, begin, end):
+        medium = begin + (end - begin) // 2
+        if self.list[begin] > self.list[end]:
+            self.list[end], self.list[begin] = self.list[begin], self.list[end]
+        if self.list[medium] < self.list[begin]:
+            self.list[medium], self.list[begin] = self.list[begin], self.list[medium]
+        if self.list[medium] > self.list[end]:
+            self.list[medium], self.list[end] = self.list[end], self.list[medium]
+        return end
+
+
+    def quick_sort_partition(self, begin, end):
+        pivot = self.quick_sort_medium_pivot(begin, end)
+        done = False
+        while not done:
+            while begin < end and self.list[begin] <= self.list[pivot]:
+                begin += 1
+            while begin < end and self.list[end] >= self.list[pivot]:
+                end -= 1
+            if begin >= end:
+                done = True
+            self.swap(begin, end)
+        # Put pivot in the right position in the sort list
+        self.swap(end, pivot)
+        return end
+
+    def quick_sort_sub(self, begin, end):
+        if begin < end:
+            pivot = self.quick_sort_partition(begin, end)
+            self.quick_sort_sub(begin, pivot - 1)
+            self.quick_sort_sub(pivot + 1, end)

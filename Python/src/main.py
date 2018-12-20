@@ -6,14 +6,21 @@ import random
 import src.misc as misc
 
 def sort_func():
+    """
+    TODO:
+    - Add unit test for the written sort compare with built-in sort
+    - Add bench mark for written sort
+    """
     ran_list = [random.randint(0, 100) for _ in range(10)]
     print(ran_list)
     sort = Sort(ran_list)
     sort.selection_sort()
     sort.restore()
     sort.insertion_sort()
-    # sort.merge_sort()
-    # sort.print_sorted_list()
+    sort.restore()
+    sort.quick_sort()
+    sort.restore()
+    sort.merge_sort()
 
 def dynamic_programming_func():
     s1 = "ABCBDABA"
